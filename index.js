@@ -1,5 +1,7 @@
 const { select,input, checkbox } = require('@inquirer/prompts')
 
+let mensagem = "Bem vindo ao APP"
+
 let meta = {
     value: 'Beber água',
     checked: false
@@ -19,7 +21,7 @@ const listarMetas = async () => {
     })
 
     if(respostas.length == 0){
-        console.log("Nenhuma meta foi selecionada")
+        mensagem = "Nenhuma meta foi selecionada"
         return
     }
 
@@ -31,16 +33,16 @@ const listarMetas = async () => {
         meta.checked = true
     })
 
-    console.log("Meta(s) marcadas como concluída(s)")
+    mensagem = "Meta(s) marcadas como concluída(s)"
 }
 
 const cadastroMetas = async () => {
     const meta = await input({
-        message: 'Digite a meta: '
+        message : "Digite a meta: "
     })
 
     if(meta.length == 0) {
-        console.log("A meta não pode ser vazia!")
+        mensagem = "A meta não pode ser vazia!"
         return
     }
 
@@ -55,7 +57,7 @@ const metasRealizadas = async () => {
     })
 
     if (realizadas.length == 0 ){
-        console.log("Não existe metas realizadas!")
+        mensagem = "Não existe metas realizadas!"
         return
     }
 
@@ -73,7 +75,7 @@ const metasAbertas = async () => {
     })
 
     if(abertas.length == 0) {
-        console.log("Não existem metas abertas!")
+        mensagem = "Não existem metas abertas!"
         return
     }
 
@@ -97,7 +99,7 @@ const deletarMetas = async () => {
     })
 
     if(itemDeletar.length == 0){
-        console.log("Nenhum item selecionado!")
+        mensagem = "Nenhum item selecionado!"
         return
     }
 
@@ -107,11 +109,23 @@ const deletarMetas = async () => {
         }))
     })
 
-    console.log("Metas deletadas!")
+    mensagem = "Metas deletadas!"
+}
+
+const mostrarMensagem = () => {
+    console.clear()
+
+    if (mensagem != ""){
+        console.log(mensagem)
+        console.log("")
+        mensagem = ""
+    }
 }
 
 const start = async () => {
     while(true){
+        mostrarMensagem()
+
         const opcao = await select ({
             message: "Menu >",
             choices: [
