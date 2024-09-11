@@ -18,7 +18,7 @@ const inicio = async () => {
 
             switch(opcao){
                 case 'iniciar':
-                    console.log('Iniciou')
+                    cadastroMeta()
                     break
                 case 'sair':
                     console.log('Saiu')
